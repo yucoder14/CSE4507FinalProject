@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <link rel="stylesheet" href="css/processbook_style.css">
+  </head>
+  <body>
+	<div class="section">
+	  <h1>Basic Info</h1>
+	  <ul>
+		<li><strong>Title:</strong> Visualizing "Forks" in the Roads: Entropy and Mathematical resasoning of LLMs</li>
+		<li><strong>Changwoo Yu</strong> | <a href='mailto:changwoo@wustl.edu'>changwoo@wustl.edu</a> | 612299 </li>
+		<li><strong>Chenjie Mao</strong> | <a href='mailto:cmao@wustl.edu'>cmao@wustl.edu</a> | your_id </li>
+	  </ul>
+	</div>
+	<div class="section">
+	  <h1>Background and Motivation</h1>
+
+	  <h3> Large Language Models </h3>
+	  <p> 
+	  	Large Language Models (LLMs) are machine learning models that have been specially trained to generate language. LLMs are often viewed as 
+		"stochastic parrots" that echoes back what it has learned from giant copora. While it is true that the core idea behind LLMs is based on 
+		statistics and probabilities, there may be more than what appears on the surface. Texts are generally considered as unstructured data. 
+		However, certain domains of texts, such as computer programs and mathematical reasoning, are written according to deterministic set of 
+		rules. With recent advancements in programming and mathematical reasoning, LLMs have demonstrated their impressive capacity to learn 
+		those rules from vast amounts of data. Active research is being conducted to understand how exactly these models "reason" (a charged word)
+		through their generative endeavors. 
+	  </p>
+	  <h3> Entropy and Language Modeling </h3>
+	  <p>
+	 	Entropy, roughly, is a measure of surprise. Higher the entropy, greater the randomness. When a LLM predicts the next word in a sentence, 
+		it does so in stochastic fashion. That is, instead of returning a single word, the model returns a probabillity distribution over all of 
+		its vocabulary. Then, a decoding algorithm (e.g. top-k, top-p, beam-search) selects one token from that distribution. Since the model 
+		returns a probability distribution, we can measure the "unsureness" or the entropy of the model at token level. While beyond the scope of 
+		this project, training of LLMs involves reducing entropy (cross-entropy to be more precise), so that its predicted probability distributions
+		mirror that of training data. This is why LLMs are often described as "stochastic parrots". At its core, the training objective of a LLM
+		is to "parrot" the training data (a lot of details are glossed over here).   
+	  </p>
+	  <!-- section on some research ?-->
+	</div>
+	<div class="section">
+	  <h1>Project Objectives</h1>
+	  <p>
+		The objective of this project is two folds. The main objective of this project is to visualize internals of the model by using entropy
+		as a proxy. Understanding the inner workings of LLMs are notoriously challenging given their scale and complexity. Entropy provides some 
+		insights into how the model "thinks", for it illustrates how confident or confused the model is at each generation step. By visualizing 
+		entropy, we hope to foster better understanding of language modeling for the viewers. Another, more abitious objective is to explore whether,
+		through visualization, we could uncover underlying structures in model's generative process in specific domains. As mentioned previously, 
+		code and mathematical reasoning are governed by strict set of logic. It would be interesting to explore how the entropy of the model's 
+		generation is impacted by different domains. For instance, comparing entropy between texts from math and those from philosophy. 
+	  </p>
+	</div>
+	<div class="section">
+	  <h1>Data</h1>
+	  <!-- we might want to find another dataset that is not math for comparison --> 
+	  <p>
+	  </p>
+	</div>
+	<div class="section">
+	  <h1>Data Processing</h1>
+	  <!-- what model is used --> 
+	  <p>
+	  </p>
+	</div>
+	<div class="section">
+	  <h1>Visualization Design</h1>
+	  <h3> Overview of the Visualization System </h3>
+	  <img src="assets/overview.png">
+	  <p>
+		Overall, we imagine that the visualization system will consist of three main components: 1) filter, 2) prompt viewer/selector, and 3) 
+		canvas. Users should be able to filter and sort prompts by problem types and/or problem levels, allowing them to easily navigate through
+		different types of prompts. Through the prompt viewer/selector, users will select a prompt to see model's corresponding generation. The
+		canvas is where the main visualization component will be. We hope that simplicity of our design will allow users to focus more on exploring
+		model generation.
+	  </p>
+	  <h3> Main Visualization Component </h3>
+	  <p>
+	  	This is where most of our efforts will be focused on. The goal of our visualization will be to effectively communicate the entropy information
+		of model's generated texts. Mainly, we will be working with two types of data in our visualization: text and floating pointer numbers. 
+		Each generation step will have associated probability distribution among n tokens, which will be used to calculate entropy at each generation 
+		step for some selected token. Then, we are tasked with encoding the autoregressive generation as well as entropy.
+	  </p>
+	  <h4> Idea 1: Highlighted Text </h4>
+	  <img src="assets/text_entropy.png">
+	  <h4> Idea 2: Autoregressive Selector </h4>
+	  <img src="assets/entropy_selector.png">
+	  <h4> Idea 3: Entropy Tree </h4>
+	  <img src="assets/entropy_tree.png">
+	  <h4> Final Proposal </h4>
+	  <img src="assets/tree_to_text.png">
+	  <img src="assets/back_to_tree.png">
+	</div>
+	<div class="section">
+	  <h1>Must-Have Features</h1>
+	  <ul>
+		<li></li>
+		<li></li>
+	  </ul>
+	</div>
+	<div class="section">
+	  <h1>Optional Features</h1>
+	  <p>
+	  </p>
+	</div>
+	<div class="section">
+	  <h1>Project Schedule</h1>
+	  <p>
+	  </p>
+	</div>
+  </body>
+</html>
+
