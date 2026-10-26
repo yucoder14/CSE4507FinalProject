@@ -9,7 +9,7 @@
 	  <ul>
 		<li><strong>Title:</strong> Visualizing "Forks" in the Roads: Entropy and Mathematical resasoning of LLMs</li>
 		<li><strong>Changwoo Yu</strong> | <a href='mailto:changwoo@wustl.edu'>changwoo@wustl.edu</a> | 612299 </li>
-		<li><strong>Chenjie Mao</strong> | <a href='mailto:cmao@wustl.edu'>cmao@wustl.edu</a> | your_id </li>
+		<li><strong>Chenjie Mao</strong> | <a href='mailto:cmao@wustl.edu'>cmao@wustl.edu</a> | 603512 </li>
 	  </ul>
 	</div>
 	<div class="section">
@@ -52,14 +52,70 @@
 	<div class="section">
 	  <h1>Data</h1>
 	  <!-- we might want to find another dataset that is not math for comparison --> 
-	  <p>
-	  </p>
+      <p>
+         We are mainly using the Mathematics Aptitude Test of Heuristics (MATH) dataset, which consists of problems from mathematics competitions, including the AMC 10, AMC 12, AIME, and more. Each problem in MATH has a full step-by-step solution, which we can use to compute the features of the model.
+         Instead of using the original dataset version, we use <code>DigitalLearningGmbH/MATH-lighteval</code>. This version of the dataset contains appropriate builder configs.
+      </p>
+
+      <p>
+         We are also considering using datasets beyond math reasoning, such as coding and agentic tasks. For coding, we are looking at the OpenCodeReasoning dataset, which is the largest reasoning-based synthetic dataset to date, comprising 735,255 Python samples across 28,319 unique competitive programming questions. OpenCodeReasoning is designed for supervised fine-tuning (SFT).
+      </p>
+
+      <p>
+         Overall, we hope that the diverse usage of datasets, paired with our token entropy visualization approach, can provide an accurate visualization of the reasoning processes and patterns of a model.
+      </p>
 	</div>
 	<div class="section">
 	  <h1>Data Processing</h1>
 	  <!-- what model is used --> 
-	  <p>
-	  </p>
+      <p>
+      <strong>Model Choice:</strong> We are using Qwen3, which is nearly the latest generation of large language models in the Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Due to resource limitations, we are considering using a smaller model variant (e.g., the 0.6B model).
+      </p>
+
+      <p>
+      We are still choosing between the base model and the post-tuned model. The latter is fine-tuned, which may offer better alignment, but the base model provides raw, unaligned token distributions.
+      </p>
+
+      <p>
+      <strong>Prompt Processing:</strong> Given an LLM, we are interested in analyzing its generation patterns. In this section, we outline how we format and process our prompts.
+      </p>
+
+      <p>
+      We first wrap the input with a chat template, which structures the model to act as a helpful assistant tailored to answer questions. It typically looks like this:
+      <pre><code>
+<|im_start|>user\nSolve the following math problem step by step. ... Remember to put your answer on
+its own line after "Answer:".<|im_end|>\n<|im_start|>assistant\n\n'
+      </code></pre>
+      Here, we also added instructions like "Solve the following math problem step by step." and "Remember to put your answer on its own line after 'Answer:'," which are typically used to elicit a structured, formatted answer.
+      We then append a prefix of the solution from the dataset to the prompt, which typically results in something like:
+      <pre><code>
+'<|im_start|>user\nSolve the following math problem step by step. Points $A,B,C,D,E$ and $F$ lie, in that order,
+on $\\overline{AF}$, dividing it into five segments, each of length 1. Point $G$ is not on line $AF$. Point $H$
+lies on $\\overline{GD}$, and point $J$ lies on $\\overline{GF}$. The line segments $\\overline{HC},
+\\overline{JE},$ and $\\overline{AG}$ are parallel. Find $HC/JE$. Remember to put your answer on its own line
+after "Answer:".<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\nTo solve the problem, we need to determine
+the ratio \\( \\frac{HC}{JE} \\) given that'
+      </code></pre>
+      We then feed this chunk into the model and compute the statistics we want to visualize, mainly, the hidden states before the language model head and the next-token distribution. There are several key points worth noting:
+      <ul>
+          <li>We are interested in the hidden state instead of the token embedding. The former is a tensor computed right before the <code>lm_head</code> used to predict the next token, whereas the latter is assigned to every token. This means we are primarily focused on the next-token behavior of the model.</li>
+          <li>Instead of using the distribution over all vocabulary tokens, we will likely only use the probabilities of the top-$k$ tokens, as the full vocabulary size is massive for the Qwen3 family.</li>
+      </ul>
+      One entry of the processed data looks like this:
+      <pre><code>
+{"example": 0, "prefix_len": 0, "input_text": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud.
+You are a helpful assistant.<|im_end|>\n<|im_start|>user\nSolve the following math problem step by step.
+How many vertical asymptotes does the graph of $y=\\frac{2}{x^2+x-6}$ have? Remember to put your answer on
+its own line after \"Answer:\".<|im_end|>\n<|im_start|>assistant\n", "prefix_text": "", "next_token_id": 785,
+"next_token": "The", "next_token_prob": 0.00508663197979331, "top": [["To", 1249, 0.9553558230400085],
+["Answer", 16141, 0.01801641657948494], ["The", 785, 0.00508663197979331], ["Step", 8304, 0.005080659408122301],
+["First", 5338, 0.003323637181892991], ["###", 14374, 0.002597952727228403], ["**", 334, 0.002054785378277302],
+["Let", 10061, 0.001930398866534233], ["1", 16, 0.0010608343873172998], ["We", 1654, 0.0009453252423554659]],
+"tensor_file": "outputs/tensors/example_00000.pt", "tensor_row": 0}
+      </code></pre>
+      This processed data will then be passed down to the subsequent visualization components.
+      </p>
+
 	</div>
 	<div class="section">
 	  <h1>Visualization Design</h1>
