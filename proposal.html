@@ -147,15 +147,28 @@ its own line after \"Answer:\".<|im_end|>\n<|im_start|>assistant\n", "prefix_tex
 	  <img src="assets/entropy_selector.png">
 	  <p>
 	  	To encode the autoregressive nature of the generation, we could simulate the task of next token prediction through an interactive component.
-		By forcing users to select tokens from the distribution, 
+		The upside is that users will experience the autoregressive nature of the generation. The downside is that users may be too focus on the 
+		generation aspect, which is not central to our objective.
 	  </p>
 	  <h4> Idea 3: Entropy Tree </h4>
 	  <img src="assets/entropy_tree.png">
 	  <p>
+	  	Yet another way to encode the autoregressive, stochastic nature is through direction and branching. Trees lend themselves to be a great 
+		visualization for both the autoregressive and stochastic characteristic of language generation. Similar to previous methods, color 
+		can be used to encode the entropy at each generation step. Unlike the previous approach, users are able to observe the generated content 
+		at a macro scale, which may uncover underlying structures of different articles. However, branching can quickly get out of hand, and the 
+		visualization may become too cluttered. 
 	  </p>
 	  <h4> Final Proposal </h4>
 	  <img src="assets/tree_to_text.png">
 	  <p>
+	  	The final design seeks to be a culmination of all three ideas. The main piece of the visualization will be the tree but with an additional
+		feature where users can select nodes at every "fork" in the path, allowing them to explore how different choices can lead to different 
+		answers. We have not finalize yet how exactly we would control the branching of the generation, but I imagine it would entail selecting 
+		forks at steps with entropy above some threshold.   
+
+		Each node will encode entropy with color. We have yet to decide whether to also put tokens on the nodes or render them separately once 
+		the user has selected a full path through the tree. The rendered text will be the visualization discussed in Idea 1.  
 	  </p>
 	</div>
 	<div class="section">
@@ -164,19 +177,22 @@ its own line after \"Answer:\".<|im_end|>\n<|im_start|>assistant\n", "prefix_tex
 		<li> Users should be able to easily navigate between different prompts </li>
 		<li> Users should be able to easily filter/sort prompts </li>
 		<li> Users should be able to zoom in/out and drag the canvas to view the entropy tree </li>
-		<li> Users should be able to select paths at the "forks" </li>
+		<li> Users should be able to select paths at the "forks". A full path selection should automatically render the highlight text. </li>
 	  </ul>
 	</div>
 	<div class="section">
 	  <h1>Optional Features</h1>
 	  <ul>
-		<li></li>
+		<li> Implement a selection of a simulated decoding algorithms to automatically select a path through the tree. </li>
+		<li> Implement multiple tabs/panes, so that users can compare visualization between two prompts. </li>
 	  </ul>
 	</div>
 	<div class="section">
 	  <h1>Project Schedule</h1>
 	  <ul>
-		<li><strong>Week of </strong></li>
+		<li><strong>Week of Oct 26 </strong>: Changwoo will prototype the main visualization components (mostly the highlighted text componenet). Chenjie will work on data processing. Begin discussing about the architecture of the visualization system. </li>
+		<li><strong>Week of Nov 2nd </strong>: Changwoo wil continue to work on the visualization components, hopefully focusing more on the tree visualization. Chenjie may still be working on data processing but should begin drafting the visualization system architecture. </li>
+		<li><strong>Week of Nov 9th </strong>: Milestone 1 is due. May not have all the features but should have integrated every component. </li>
 	  </ul>
 	</div>
   </body>
