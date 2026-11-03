@@ -55,14 +55,19 @@ d3.json(demo_data).then((json) => {
 		.join("g")
 		.attr("class", "node")
 		.attr("transform", d => `translate(${d.y}, ${d.x})`)
-		.call(g => g.append("text").text(d => {return d.data.token_str}))
+		.call(g => 
+			g.append("text")
+				.text(d => {return d.data.token_str})
+		)
 		.call(g =>
-		  g
-			.append("circle")
+		  g.append("circle")
 			.attr("r", 5)
 			.attr("fill", "#333")
 			.attr("id", d => `node-${d.data.node_id}`)
 			.attr("parent-id", d => `node-${d.data.parent_id}`)
+			// these should probably be stored separately and not as attributes
+			.attr("text", d => d.data.token_str)
+			.attr("entropy", d => d.data.entropy)
 			.on("mouseover", (event, d) => { 
 				const hovered = d3.select(event.target);
 				if (!hovered.classed("selected")) {  
@@ -107,10 +112,16 @@ d3.json(demo_data).then((json) => {
 			paths.push(currentPath);
 			nodeID = parentID; 
 		}	
+		let textData = [];
 		nodes.forEach((node) => {
+			textData.push({
+				text: node.attr("text"),
+				entropy: node.attr("entropy")
+			});
 			node.style("fill", "#f00");
 			node.classed("selected", true)
 		});
+		console.log("asdf", textData);
 		paths.forEach((path) => {
 			console.log(path);
 			path.style("stroke", "#a00");
