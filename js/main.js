@@ -11,12 +11,17 @@ d3.json(data).then((json) => {
 	});
 
 	// event handlers
-	const events = d3.dispatch("NodeSelection");
+	const events = d3.dispatch("NodeSelection", "RenderText");
 
 	const tree = new ReasoningTree("tree-canvas", demoTree, events);
+	const paragraph = new Paragraph("text-canvas", events);
 
 	events.on("NodeSelection.dashboard", nodeInfo => {
 		tree.highlightPath(nodeInfo);
+	})
+
+	events.on("RenderText.dashboard", segments => {
+		paragraph.renderText(segments);
 	})
 });
 

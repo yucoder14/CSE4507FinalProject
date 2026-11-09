@@ -5,27 +5,40 @@ class ReasoningTree {
 		this.divID = divID;
 		this.treeData = treeData;
 		this.events = events;
+		this.currentNode = null;	
+		this.nodeLookUp = {};
 
 		this.init();
 	}	
 
 	init() {
-		this.svg = d3.select(`#${this.divID}`).append("svg")
-			.attr("width", 1000)
-			.attr("height", 1000);
-
+		this.svgWidth = document.documentElement.clientWidth / 2;
+		this.svgHeight = document.documentElement.clientHeight;
+		this.svg = d3.select(`#${this.divID}`)
+			.append("svg")
+			.attr("width", this.svgWidth)
+			.attr("height", this.svgHeight)
+					
 		// tree layout 
-		this.tree = d3.tree().size([700, 700]);
+		this.treeMargin = {
+			top: this.svgHeight * 0.05, left: this.svgWidth * 0.05
+		};
+		this.treeWidth = this.svgWidth * 0.9;
+		this.treeHeight = this.svgHeight * 0.9;
+		this.tree = d3.tree().size([this.treeHeight, this.treeWidth]);
 
 		// group for the tree data
 		this.treeGroup = this.svg.append("g") 
-			.attr("transform", "translate(150, 70)")
+			.attr("transform", `translate(${this.treeMargin.left},${this.treeMargin.top})`)
 
-
-		this.update();
+		this.drawFullTree();
 	}	
 
-	update() {
+	getSubTree() {
+		// the sub tree should consist of parent node, current node, and immediate children	 
+	}	
+
+	drawFullTree() {
 		// laid out data
 		const root = d3.hierarchy(this.treeData, d => d.children_nodes);
 		const reasoningTree = this.tree(root);
@@ -58,10 +71,12 @@ class ReasoningTree {
 			.join("g")
 			.attr("class", "node")
 			.attr("transform", d => `translate(${d.y}, ${d.x})`)
-	//		.call(g => 
-	//			g.append("text")
-	//				.text(d => {return d.data.text})
-	//		)
+	  		.call(g => 
+	  			g.append("text")
+	  				.text(d => {
+						console.log(d.data.fork);
+					})
+	  		)
 			.call(g =>
 			  g.append("circle")
 				.attr("r", 5)
@@ -119,16 +134,12 @@ class ReasoningTree {
 		nodes.forEach((node) => {
 			textData.push({
 				text: node.attr("text"),
-				entropy: node.attr("entropy")
+				node_id: node.attr("id")
 			});
 			node.style("fill", "#f00");
 			node.classed("selected", true)
 		});
-//		let foo = "";	
-//		for (let i = textData.length - 1; i > -1; i -=1) {
-//			foo = foo + textData[i].text; 
-//		}	
-//		console.log(foo);
+		this.events.call("RenderText", this, textData);
 		paths.forEach((path) => {
 			path.style("stroke", "#a00")
 			path.classed("selected", true);
