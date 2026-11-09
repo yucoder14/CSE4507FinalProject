@@ -196,5 +196,55 @@ its own line after \"Answer:\".<|im_end|>\n<|im_start|>assistant\n", "prefix_tex
 	  </ul>
 	</div>
   </body>
+  <div class="section">
+	<h1> Project Milestone 1</h1>
+	<h2>Data Processing</h2>
+
+	<h2>Visualization System Proof of Concept</h2>
+	<h3>Design Updates</h3>
+	<p>
+		The main interaction component will be the answer tree that users can click on nodes to select "reasoning paths". When a 
+		path is chosen from the tree, appropriate text segments will be rendered in the text canvas. While we initially planned to have 
+	  	the text canvas to only appear upon selection of the terminal node, given that each node now corresponds to text segments and not 
+		individual tokens, we thought it would be best to have the tree navigation and text canvas side by side. 
+	</p>
+	<h3>Initial State</h3>
+	<img src="assets/default_tree0.png">
+	<p>
+		Initially, users are presented with a tree that represents the forks and different paths of model's answers. 
+	</p>
+	<h3>Node Selection</h3>
+	<img src="assets/default_tree1.png">
+	<p>
+		By clicking on the node, users are able to render the associated text segment in the text canvas. As of now, there is no appropriate
+		wrapping of texts implement or text highlighting. 	
+	</p>
+	<img src="assets/default_tree2.png">
+	<p>
+		By clicking on child node, users are able to further render associated segments in the answer path. 
+	</p>
+	<h3>Alternate Path Selection</h3>
+	<img src="assets/default_tree4.png">
+	<p>
+		Users can choose different partial or full paths by selecting any nodes.
+	</p>
+	<h2> Work that needs to be done </h2>
+	<ul>
+	  <li> 
+		<strong>Generate/Finalize all the data</strong>: While we have largely agreed upon the data structure and how different components 
+		will communicate with one another, we have yet to generate all the necesseary data. This should be completed by week of Nov 9th.
+	  </li>
+	  <li>
+		Node labels and Sub-tree navigation option. We have yet to encode entropy information with node colors as we have outlined in our 
+	  	proposal. We are also planning on sub-tree navigation option, where only the immediate ancestor and immediate descendants are visible 
+		at each node. Only when the user reaches the terminal node will the tree expand to its full structure. We also plan to support the 
+		capability to zoom in and out of the tree.	
+	  </li>
+	  <li>
+		Highlighted text module. We have yet to integrate this component due to missing data points. However, we have laid out how the 
+		text module and the tree module will communicate through d3 event dispatchers.
+	  </li>
+	</ul>
+  </div>
 </html>
 
