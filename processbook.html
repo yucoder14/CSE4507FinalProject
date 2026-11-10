@@ -198,7 +198,133 @@ its own line after \"Answer:\".<|im_end|>\n<|im_start|>assistant\n", "prefix_tex
   </body>
   <div class="section">
 	<h1> Project Milestone 1</h1>
-	<h2>Data Processing</h2>
+
+<h2>Data Processing</h2>
+
+<p>
+  To allow users to interact with an autoregressive text generation process, our first step is to construct a reasoning tree. Rather than presenting a single, linear sequence of generated tokens, the tree exposes alternative generation paths at selected decision points. This allows users to explore how different token choices can lead to different reasoning trajectories and potentially different final answers.
+</p>
+
+<p>
+<strong>1. Initial Approach: Branching During Generation</strong> Initially, we considered generating the reasoning tree on the fly. At each decoding step, we calculate the entropy of the model's next-token probability distribution, then branch from this node if it has high entropy.
+</p>
+
+<p>
+  The intuition is straightforward: a high-entropy distribution indicates that the model is relatively uncertain about which token to generate next. Such positions may be interesting points at which to introduce alternative reasoning paths.
+</p>
+
+<p>
+  One major problem we encountered was that the entropy threshold was extremely sensitive. A small change in the threshold could produce drastically different tree structures. In practice, this often led to two undesirable extremes:
+</p>
+
+<ul>
+  <li>
+    <strong>Threshold too low:</strong>
+    The model branches too frequently, producing an excessively large tree. This makes generation computationally expensive and the resulting tree difficult to visualize or navigate.
+  </li>
+  <li>
+    <strong>Threshold too high:</strong>
+    Very few positions satisfy the branching condition, leaving us with an almost linear generation path. 
+  </li>
+</ul>
+
+
+<p>
+<strong>2. Revised Approach: Budget-Based Branching</strong> To address this issue, we replaced threshold-based branching with a budget-based branching strategy. Instead of immediately creating a fork whenever the entropy exceeds a fixed value, we collect potential branching candidates during generation and rank them using a global priority queue.
+</p>
+
+<p>
+  We first generate a main reasoning trajectory using greedy decoding. At each decoding step, we record eligible alternative tokens among the top-k predictions, together with the entropy of the next-token distribution and the probability of each alternative.
+</p>
+
+<p>
+  Once the main trajectory is generated, we select the highest-ranked candidate from the priority queue, force the corresponding alternative token, and continue generating a new trajectory greedily. Newly generated trajectories can also contribute additional branching candidates to the same queue.
+</p>
+
+<p>
+  We repeat this process until the branching budget is exhausted or no eligible candidates remain.
+</p>
+
+<p>
+  This approach provides several advantages:
+
+<ul>
+  <li>
+    <strong>Explicit size control:</strong> The maximum number of additional trajectories is controlled directly by a branching budget, rather than indirectly through an entropy threshold.
+  </li>
+  <li>
+    <strong>Prioritized exploration:</strong> The algorithm favors candidates associated with higher entropy or higher alternative-token probability, depending on the chosen scoring strategy.
+  </li>
+  <li>
+    <strong>Reduced redundant branching:</strong> Additional constraints, including a minimum probability for alternative tokens, a minimum distance between forks, and a maximum number of forks per path, help prevent excessive branching in nearby positions.
+  </li>
+</ul>
+</p>
+
+<p>
+This approach separates the question of <em>where to branch</em> from <em>how much to branch</em>, making the size of the resulting tree substantially more predictable.
+</p>
+
+<p>
+<strong>3. Example Output</strong> 
+  Although generation operates at the token level, storing and visualizing every token as an individual node would produce an unnecessarily large and deeply nested tree. To make the tree more compact, we compress consecutive tokens that form a single, non-branching path into a reasoning segment. Each segment contains the generated text between two branching points, or between a branching point and the end of a trajectory.
+</p>
+
+<p> 
+The final dataset is exported as a nested JSON structure, with the original question serving as the top-level key. For example, given the question:
+</p>
+
+<p>
+  <em>
+    How many vertical asymptotes does the graph of
+    \(y = \frac{2}{x^2+x-6}\) have?
+  </em>
+</p>
+
+<p>
+  A shortened example of the resulting representation is:
+</p>
+
+<pre><code>{
+  "segment_id": 0,
+  "parent_id": null,
+  "text": "To determine the number of vertical asymptotes...",
+  "num_tokens": 204,
+  "start_depth": 0,
+  "end_depth": 204,
+  "entry": null,
+  "fork": {
+    "depth": 205,
+    "entropy": 1.8105,
+    "options": [
+      {
+        "token_str": "To",
+        "prob": 0.4077,
+        "is_greedy": true
+      },
+      {
+        "token_str": "\\[",
+        "prob": 0.1917,
+        "is_greedy": false
+      },
+      {
+        "token_str": "For",
+        "prob": 0.1191,
+        "is_greedy": false
+      }
+    ]
+  },
+  "is_leaf": false,
+  "ends_with_eos": false,
+  "children": [1, 5, 12],
+  "children_nodes": [
+    ...
+  ]
+}</code></pre>
+
+<p>
+  In this example, the first 204 generated tokens are compressed into a single segment. At depth 205, the reasoning process branches into three alternatives, each corresponding to a different next-token choice. The <code>fork</code> field records the token distribution information at the branching point, while the <code>children_nodes</code> field contains the resulting reasoning continuations.
+</p>
 
 	<h2>Visualization System Proof of Concept</h2>
 	<h3>Design Updates</h3>
