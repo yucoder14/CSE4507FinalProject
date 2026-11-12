@@ -17,6 +17,9 @@ d3.json(data).then((json) => {
 	const paragraph = new Paragraph("text-canvas", events);
 
 	events.on("NodeSelection.dashboard", nodeInfo => {
+		// draw sub trees
+		console.log(tree.getSubTree(nodeInfo.nodeID));
+		tree.drawTree(tree.getSubTree(nodeInfo.nodeID));
 		tree.highlightPath(nodeInfo);
 	})
 

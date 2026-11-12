@@ -1,12 +1,11 @@
-//const demo_data = "./data/tree_0.json";
-
 class ReasoningTree {
 	constructor(divID, treeData, events) {
 		this.divID = divID;
 		this.treeData = treeData;
 		this.events = events;
-		this.currentNode = null;	
+		this.currentNodeID = null;	
 		this.nodeLookUp = {};
+		this.subTreeEnabled = true;
 
 		this.init();
 	}	
@@ -31,52 +30,144 @@ class ReasoningTree {
 		this.treeGroup = this.svg.append("g") 
 			.attr("transform", `translate(${this.treeMargin.left},${this.treeMargin.top})`)
 
-		this.drawFullTree();
+		this.createNodeLookUp();
+		this.currentNodeID = this.treeData.segment_id;
+		this.drawTree(this.getSubTree('node-0'));
+
+		this.svg.append("rect")
+			.attr("id", "full-tree-button")
+			.attr("x", this.treeMargin.left)
+			.attr("y", 100)
+			.attr("width", 100)
+			.attr("height", 50)
+			.on("click", (event) => {
+				this.drawTree(this.treeData);
+				this.subTreeEnabled = false;
+			})
 	}	
 
-	getSubTree() {
+	createNodeLookUp() {
+		const stack = [this.treeData];
+
+		while (stack.length != 0) {
+			const currentNode = stack.pop();		 
+			this.nodeLookUp[`node-${currentNode.segment_id}`] = currentNode;
+			stack.push(...currentNode.children_nodes);
+		}	
+	}
+
+	getSubTree(currentNodeID) {
 		// the sub tree should consist of parent node, current node, and immediate children	 
+		if (this.subTreeEnabled) {
+			const currentNode = {...this.nodeLookUp[currentNodeID]};
+			if (currentNode.children.length != 0) {
+				let childrenCopies = structuredClone(currentNode.children_nodes);
+				childrenCopies.forEach((child) => {
+					child.children = [];
+					child.children_nodes = [];
+				}); 
+				currentNode.children_nodes = childrenCopies;
+			}	
+
+			const parentID = `node-${currentNode.parent_id}`;
+			if (parentID != 'node-null') {
+				let rootCopy = {...this.nodeLookUp[parentID]};
+				rootCopy.children = [currentNodeID];
+				rootCopy.children_nodes = [currentNode];
+				return rootCopy;
+			} else {
+				return currentNode; 
+			}	
+		} 
+
+		return this.treeData;
 	}	
 
-	drawFullTree() {
+	drawTree(treeData) {
 		// laid out data
-		const root = d3.hierarchy(this.treeData, d => d.children_nodes);
+		const root = d3.hierarchy(treeData, d => d.children_nodes);
 		const reasoningTree = this.tree(root);
 
 		// drawing links from laid out data
 		this.treeGroup 
 			.selectAll(".link")
-			.data(reasoningTree.links())
-			.join("path")
-			.attr("class", "link")
-			.attr(
-			  "d",
-			  d3.linkHorizontal()
-				.x(d => d.y)
-				.y(d => d.x)
-			)
-			.attr("fill", "none")
-			.attr("stroke", "#ccc")
-			.attr("nodes", d => {
-				const parentID = d.source.data.segment_id;
-				const currentID = d.target.data.segment_id;
+			.data(reasoningTree.links(), d => `${d.source.data.segment_id}:${d.target.data.segment_id}`)
+			.join(
+				(enter) => {
+					return enter.append("path")
+						.attr("class", "link")
+						.attr("fill", "none")
+						.attr("stroke", "#ccc")
+						.attr("nodes", d => {
+							const parentID = d.source.data.segment_id;
+							const currentID = d.target.data.segment_id;
 
-				return `node-${parentID}:node-${currentID}`
-			});
+							return `node-${parentID}:node-${currentID}`
+						})
+						.attr(
+						  "d",
+						  d3.linkHorizontal()
+							.x(d => d.x)
+							.y(d => this.treeHeight/2)
+						)
+						.transition()
+						.attr(
+						  "d",
+						  d3.linkHorizontal()
+							.x(d => d.y)
+							.y(d => d.x)
+						)
+						
+				},
+				(update) => {
+					return update
+						.transition()
+						.attr(
+						  "d",
+						  d3.linkHorizontal()
+							.x(d => d.y)
+							.y(d => d.x)
+						)
+				},
+				(exit) => {
+					return exit
+						.transition()
+						.attr(
+						  "d",
+						  d3.linkHorizontal()
+							.x(d => d.x)
+							.y(d => this.treeHeight/2)
+						)
+						.remove()
+				}
+			)
 
 		// drawing nodes from laid out data
 		this.treeGroup
 			.selectAll(".node")
-			.data(reasoningTree)
-			.join("g")
-			.attr("class", "node")
-			.attr("transform", d => `translate(${d.y}, ${d.x})`)
-	  		.call(g => 
-	  			g.append("text")
-	  				.text(d => {
-						console.log(d.data.fork);
-					})
-	  		)
+			.data(reasoningTree, d =>{
+				return d.data.segment_id;
+			})
+			.join(
+				(enter) => {
+					return enter.append("g")
+						.attr("class", "node")
+						.attr("transform", d => `translate(${d.y}, ${this.treeHeight/2})`)
+						.transition()
+						.attr("transform", d => `translate(${d.y}, ${d.x})`)
+				},
+				(update) => {
+					return update
+						.transition()
+						.attr("transform", d => `translate(${d.y}, ${d.x})`)
+				},
+				(exit) => {
+					return exit
+						.transition()
+						.attr("transform", d => `translate(${d.y}, ${this.treeHeight/2})`)
+						.remove();
+				}	
+			)
 			.call(g =>
 			  g.append("circle")
 				.attr("r", 5)
@@ -105,6 +196,11 @@ class ReasoningTree {
 					});
 				})
 			);
+//	  		.call(g => 
+//	  			g.append("text")
+//	  				.text(d => {
+//					})
+//	  		)
 	}
 
 	highlightPath(nodeInfo) {
@@ -136,7 +232,7 @@ class ReasoningTree {
 				text: node.attr("text"),
 				node_id: node.attr("id")
 			});
-			node.style("fill", "#f00");
+//			node.style("fill", "#f00");
 			node.classed("selected", true)
 		});
 		this.events.call("RenderText", this, textData);

@@ -23,10 +23,8 @@ class Paragraph {
 
 	renderText(segments) {
 		const reversed = segments.reverse();
-		console.log(segments); 
 		this.svg.selectAll(".segment") 
 			.data(segments, d => {
-				console.log(d.node_id);
 				return d.node_id;
 			})
 			.join(
