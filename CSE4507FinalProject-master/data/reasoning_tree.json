@@ -1,0 +1,113 @@
+{
+  "How many vertical asymptotes does the graph of $y=\\frac{2}{x^2+x-6}$ have?": {
+    "node_id": 0,
+    "parent_id": null,
+    "token_id": -1,
+    "token_str": "<PROMPT_END>",
+    "depth": 0,
+    "entropy": 0.28542956709861755,
+    "prob": 1.0,
+    "children": [
+      1
+    ],
+    "children_nodes": [
+      {
+        "node_id": 1,
+        "parent_id": 0,
+        "token_id": 1249,
+        "token_str": "To",
+        "depth": 1,
+        "entropy": 0.28542956709861755,
+        "prob": 0.9553558230400085,
+        "children": [
+          2
+        ],
+        "children_nodes": [
+          {
+            "node_id": 2,
+            "parent_id": 1,
+            "token_id": 8253,
+            "token_str": " determine",
+            "depth": 2,
+            "entropy": 0.6790181994438171,
+            "prob": 0.7779988050460815,
+            "children": [
+              3
+            ],
+            "children_nodes": [
+              {
+                "node_id": 3,
+                "parent_id": 2,
+                "token_id": 279,
+                "token_str": " the",
+                "depth": 3,
+                "entropy": 0.3593543767929077,
+                "prob": 0.8853393197059631,
+                "children": [],
+                "children_nodes": []
+              },
+              {
+                "node_id": 4,
+                "parent_id": 2,
+                "token_id": 279,
+                "token_str": " alice",
+                "depth": 3,
+                "entropy": 0.3593543767929077,
+                "prob": 0.8853393197059631,
+                "children": [],
+                "children_nodes": []
+              },
+              {
+                "node_id": 6,
+                "parent_id": 2,
+                "token_id": 279,
+                "token_str": " bob",
+                "depth": 3,
+                "entropy": 0.3593543767929077,
+                "prob": 0.8853393197059631,
+                "children": [],
+                "children_nodes": []
+              }
+            ]
+          },
+		  {
+            "node_id": 7,
+            "parent_id": 1,
+            "token_id": 8253,
+            "token_str": " asdf",
+            "depth": 2,
+            "entropy": 0.6790181994438171,
+            "prob": 0.7779988050460815,
+            "children": [
+              2
+            ],
+            "children_nodes": [
+              {
+                "node_id": 8,
+                "parent_id": 7,
+                "token_id": 279,
+                "token_str": " lorem",
+                "depth": 3,
+                "entropy": 0.3593543767929077,
+                "prob": 0.8853393197059631,
+                "children": [],
+                "children_nodes": []
+              },
+              {
+                "node_id": 9,
+                "parent_id": 7,
+                "token_id": 279,
+                "token_str": " ipsum",
+                "depth": 3,
+                "entropy": 0.3593543767929077,
+                "prob": 0.8853393197059631,
+                "children": [],
+                "children_nodes": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

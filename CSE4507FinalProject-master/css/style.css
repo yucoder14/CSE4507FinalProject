@@ -1,0 +1,24 @@
+#display {
+	display: flex;
+	gap: 16px;
+}
+
+#filter-panel {
+	width: 220px;
+	flex: 0 0 220px;
+	padding: 16px;
+	border: 1px solid #ddd;
+	font-family: Arial, sans-serif;
+}
+
+#filter-panel label { display: block; margin: 10px 0 5px; }
+#filter-panel select { width: 100%; padding: 6px; }
+#problem-list { margin-top: 18px; overflow-wrap: anywhere; }
+#problem-list button { width: 100%; padding: 8px; text-align: left; cursor: pointer; }
+#tree-canvas, #text-canvas { min-width: 0; flex: 1; }
+#tree-canvas svg { width: 100%; height: 100vh; }
+#text-canvas { padding: 20px; overflow: auto; max-height: 100vh; font: 16px/1.6 Arial, sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+.highlighted-segment { padding: 1px 2px; border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.node-circle.selected { fill: #c33; }
+.link.selected { stroke: #a00; stroke-width: 2; }
+@media (max-width: 750px) { #display { flex-wrap: wrap; } #filter-panel { width: 100%; flex-basis: 100%; } }
