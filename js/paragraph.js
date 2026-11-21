@@ -1,50 +1,31 @@
 class Paragraph {
-	constructor(divID, events) { 
-		this.divID = divID; 	 
-		this.events = events
-
-		this.init();
-	}	
-
-	init() {
-		this.svgWidth = document.documentElement.clientWidth / 2;
-		this.svgHeight = document.documentElement.clientHeight;
-		this.svg = d3.select(`#${this.divID}`)
-			.append("svg")
-			.attr("width", this.svgWidth)
-			.attr("height", this.svgHeight)
-
-		this.textMargin = {
-			top: this.svgHeight * 0.05, left: this.svgWidth * 0.05
-		};
-		this.textWidth = this.svgWidth * 0.9;
-		this.textHeight = this.svgHeight * 0.9;
-	}	
+	constructor(divID, events) {
+		this.container = document.getElementById(divID);
+		this.events = events;
+	}
 
 	renderText(segments) {
-		const reversed = segments.reverse();
-		this.svg.selectAll(".segment") 
-			.data(segments, d => {
-				return d.node_id;
-			})
-			.join(
-				(enter) => {
-					return enter
-						.append("text")
-						.attr("x", this.textMargin.left) 			
-				},
-				(update) => {
-					return update
-				},
-				(exit) => {
-					return exit
-						.remove()
-				}
-			)
-			.attr("class", "segment")
-			.text(d => d.text)
-			.attr("y", (d, i) => {
-				return this.textMargin.top + i * this.textHeight / segments.length;
-			})
-	}	
-}	
+		this.container.replaceChildren();
+		const ordered = [...segments].reverse();
+		const values = ordered.map(d => d.entropy).filter(Number.isFinite);
+		const min = Math.min(...values);
+		const max = Math.max(...values);
+		const color = d3.scaleLinear()
+			.domain(values.length > 1 && max > min
+				? [min, (min + max) / 2, max]
+				: [0, 1, 2])
+			.range(["#82bff1", "#f2e5e9", "#f28e95"])
+			.clamp(true);
+
+		ordered.forEach(segment => {
+			const span = document.createElement("span");
+			span.className = "highlighted-segment";
+			span.textContent = segment.text || "";
+			if (Number.isFinite(segment.entropy)) {
+				span.style.backgroundColor = color(segment.entropy);
+				span.title = `Entry entropy: ${segment.entropy.toFixed(2)}`;
+			}
+			this.container.append(span, document.createTextNode("\n\n"));
+		});
+	}
+}
