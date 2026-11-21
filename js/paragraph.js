@@ -1,7 +1,8 @@
 class Paragraph {
-	constructor(divID, events) { 
+	constructor(divID, events, colorScales) { 
 		this.divID = divID; 	 
-		this.events = events
+		this.events = events;
+		this.colorScales = colorScales;
 
 		this.init();
 	}	
@@ -23,28 +24,12 @@ class Paragraph {
 
 	renderText(segments) {
 		const reversed = segments.reverse();
-		this.svg.selectAll(".segment") 
-			.data(segments, d => {
-				return d.node_id;
-			})
-			.join(
-				(enter) => {
-					return enter
-						.append("text")
-						.attr("x", this.textMargin.left) 			
-				},
-				(update) => {
-					return update
-				},
-				(exit) => {
-					return exit
-						.remove()
-				}
-			)
-			.attr("class", "segment")
-			.text(d => d.text)
-			.attr("y", (d, i) => {
-				return this.textMargin.top + i * this.textHeight / segments.length;
-			})
+		console.log(reversed);
+		// should render tokens 
+	}	
+
+	colorHighlights(colorMode) {
+		const colorScale = this.colorScales[+colorMode.use_entropy];
+		// should recolor the highlights using the colorScale 
 	}	
 }	

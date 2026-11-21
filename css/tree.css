@@ -1,0 +1,23 @@
+#display {
+	display: flex;
+}
+
+rect {
+	fill: #ccc; 
+}	
+
+.node-circle {
+	stroke-width: 3; 
+	stroke: #ccc;
+}	
+
+.link {
+	stroke-width: 3; 
+	stroke: #ccc; 
+	fill: none;
+}	
+
+.selected,
+.hovered {
+	stroke: #0a0;
+}
