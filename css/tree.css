@@ -1,0 +1,50 @@
+#display {
+	display: flex;
+}
+
+#selector {
+	display: flex;
+	gap: 1rem;
+	padding: 0.75rem;
+}
+
+#selector label {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+#selector select {
+	max-width: 28rem;
+}
+
+.paragraph-canvas {
+	width: 50vw;
+	height: 100vh;
+	box-sizing: border-box;
+	padding: 2rem;
+	overflow: auto;
+	white-space: pre-wrap;
+	font-family: sans-serif;
+	line-height: 1.6;
+}
+
+rect {
+	fill: #ccc; 
+}	
+
+.node-circle {
+	stroke-width: 3; 
+	stroke: #ccc;
+}	
+
+.link {
+	stroke-width: 3; 
+	stroke: #ccc; 
+	fill: none;
+}	
+
+.selected,
+.hovered {
+	stroke: #0a0;
+}
