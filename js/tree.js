@@ -120,6 +120,8 @@ class ReasoningTree {
 		this.problemID = problemID;
 		this.treeData = treeData; 
 		this.currentNodeID = ROOT_NODE_ID;
+		this.nodeLookUp = {};
+		this.treeGroup.selectAll("*").interrupt().remove();
 
 		this.createNodeLookUp();
 
@@ -386,34 +388,22 @@ class ReasoningTree {
 		this.treeGroup.selectAll('.link')
 			.classed("selected", false)
 
-		let currentNode = d3.select(`#${this.currentNodeID}`);
-
-		let nodes = [];
-		let paths = [];
-		while (!currentNode.empty()) {
-			const nodeID = currentNode.attr("id");
-			const parentID = currentNode.attr("parent-id");
-			const currentPath = d3.select(`[nodes='${parentID}:${nodeID}']`);
-			nodes.push(currentNode);
-			paths.push(currentPath);
-			currentNode = d3.select(`#${parentID}`); 
-		}	
-
-		let segmentData = [];
-
-		nodes.forEach((node) => {
+		const segmentData = [];
+		let nodeID = this.currentNodeID;
+		while (this.nodeLookUp[nodeID]) {
+			const node = this.nodeLookUp[nodeID];
+			const parentID = node.parent_id == null ? null : `node-${node.parent_id}`;
 			segmentData.push({
-				"problem_id": this.problemID,
-				"segment_id": +node.attr("segment-id"),
-				"node_id": node.attr("id"),
+				problem_id: this.problemID,
+				segment_id: node.segment_id,
+				node_id: nodeID,
 			});
-			node.classed("selected", true)
-		});
-
+			this.treeGroup.select(`#${nodeID}`).classed("selected", true);
+			if (parentID) {
+				this.treeGroup.select(`[nodes='${parentID}:${nodeID}']`).classed("selected", true);
+			}
+			nodeID = parentID;
+		}
 		this.events.call("RenderText", this, segmentData);
-
-		paths.forEach((path) => {
-			path.classed("selected", true);
-		});
 	}	
 }	

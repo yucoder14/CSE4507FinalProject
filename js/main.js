@@ -45,11 +45,11 @@ Promise.all([
 		.domain([0, 1]) 
 		.range(["#fff", "#f00"]);
 
-	const entropycolorScale = d3.scaleDiverging()
+	const entropyColorScale = d3.scaleDiverging()
 		.domain([0, 1, 2])  
 		.interpolator(d3.piecewise(d3.interpolateRgb, ["#00a", "#fff", "#a00"]));
 
-	const colorScales = [ probColorScale, entropycolorScale ]
+	const colorScales = [ probColorScale, entropyColorScale ];
 
 	// initialize filter and selection modules
 	const selector = new Selector("selector", events, problemMetadata);
@@ -58,14 +58,15 @@ Promise.all([
 	const tree = new ReasoningTree("tree-canvas", events, colorScales);
 	const paragraph = new Paragraph("text-canvas", events, colorScales);
 
-	// just some random selection; to be removed later
-	const problemID = 35;
-	tree.seed(problemID, treeData[problemID]);
-
 	// Handle events
 	events.on("ProblemSelection.dashboard", probInfo => {
-//		const problemID = probInfo.prob_id;
-//		tree.seed(problemID, treeData[problemID]);
+		const problemID = probInfo.prob_id;
+		if (!Object.hasOwn(treeData, problemID)) {
+			console.warn(`No tree data for problem ${problemID}`);
+			return;
+		}
+		tree.seed(problemID, treeData[problemID]);
+		tree.highlightPath();
 	});	
 
 	events.on("NodeSelection.dashboard", nodeInfo => {
@@ -83,9 +84,11 @@ Promise.all([
 				return `${segmentInfo.problem_id}:${segmentInfo.segment_id}`;
 			}
 		);	
-		let tokensSegment = tokensSegmentKeys.map(
-			key => tokenData[key]
-		); 
+		let tokensSegment = tokensSegmentKeys.map(key => tokenData[key] ?? []);
 		paragraph.renderText(tokensSegment);
 	})
-});	
+}).catch(error => {
+	console.error("Could not load dashboard data", error);
+	document.getElementById("selector").textContent =
+		"Could not load data. Place the three JSONL files in ./data and serve this folder over HTTP.";
+});
