@@ -373,5 +373,21 @@ The final dataset is exported as a nested JSON structure, with the original ques
 	  </li>
 	</ul>
   </div>
+  <div class="section">
+	<h1> Project Milestone 2</h1>
+
+<h2>Data Processing</h2>
+<p>
+To support entropy-based color encoding in the visualization, we additionally record token-level statistics for every node within each reasoning segment in <code>token_stats.jsonl</code>. These include the probability and entropy of the next-token distribution, together with the top-k token candidates and their probabilities.
+</p>
+
+<p>
+We also store the metadata associated with each problem in <code>problem_metadata.jsonl</code>, including the original question, model prompt, ground-truth solution, problem category, and difficulty level, where available.
+</p>
+
+<p>
+The dataset consists of 100 problems sampled from the MATH dataset. To avoid the bias introduced by the original ordering of the dataset, we randomly shuffle the problems before selection using a fixed seed of 42. This ensures reproducibility while allowing problems from different mathematical categories and difficulty levels to be represented. Note that the sampling is not explicitly balanced across categories.
+</p>
+  </div>
 </html>
 

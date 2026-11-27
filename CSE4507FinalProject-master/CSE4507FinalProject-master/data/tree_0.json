@@ -1,0 +1,377 @@
+{
+  "How many vertical asymptotes does the graph of $y=\\frac{2}{x^2+x-6}$ have?": {
+    "segment_id": 0,
+    "parent_id": null,
+    "text": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\n",
+    "num_tokens": 204,
+    "start_depth": 0,
+    "end_depth": 204,
+    "entry": null,
+    "fork": {
+      "depth": 205,
+      "entropy": 1.8105131387710571,
+      "options": [
+        {
+          "token_id": 1249,
+          "token_str": "To",
+          "prob": 0.4076635241508484,
+          "is_greedy": true
+        },
+        {
+          "token_id": 78045,
+          "token_str": "\\[",
+          "prob": 0.19166409969329834,
+          "is_greedy": false
+        },
+        {
+          "token_id": 2461,
+          "token_str": "For",
+          "prob": 0.11913776397705078,
+          "is_greedy": false
+        }
+      ]
+    },
+    "is_leaf": false,
+    "ends_with_eos": false,
+    "children": [
+      1,
+      5,
+      12
+    ],
+    "children_nodes": [
+      {
+        "segment_id": 1,
+        "parent_id": 0,
+        "text": "To find the values of \\( x \\) that make the denominator zero, we set the factored form equal to zero:\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nWe solve this equation by setting each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the number of vertical asymptotes.\nThe function \\( y = \\frac{2}{x^2 + x - 6} \\) has vertical asymptotes at the values of \\( x \\) that make the denominator zero.",
+        "num_tokens": 161,
+        "start_depth": 205,
+        "end_depth": 365,
+        "entry": {
+          "token_id": 1249,
+          "token_str": "To",
+          "prob": 0.4076635241508484,
+          "entropy": 1.8105131387710571,
+          "is_fork": false
+        },
+        "fork": {
+          "depth": 366,
+          "entropy": 1.896154761314392,
+          "options": [
+            {
+              "token_id": 5542,
+              "token_str": " From",
+              "prob": 0.31001797318458557,
+              "is_greedy": true
+            },
+            {
+              "token_id": 1205,
+              "token_str": " We",
+              "prob": 0.16394515335559845,
+              "is_greedy": false
+            },
+            {
+              "token_id": 758,
+              "token_str": " In",
+              "prob": 0.15082406997680664,
+              "is_greedy": false
+            }
+          ]
+        },
+        "is_leaf": false,
+        "ends_with_eos": false,
+        "children": [
+          2,
+          3,
+          4
+        ],
+        "children_nodes": [
+          {
+            "segment_id": 2,
+            "parent_id": 1,
+            "text": " From our factorization, we found that \\( x = -3 \\) and \\( x = 2 \\) are the solutions.\n\nTherefore, the function has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "num_tokens": 48,
+            "start_depth": 366,
+            "end_depth": 413,
+            "entry": {
+              "token_id": 5542,
+              "token_str": " From",
+              "prob": 0.31001797318458557,
+              "entropy": 1.896154761314392,
+              "is_fork": false
+            },
+            "fork": null,
+            "is_leaf": true,
+            "ends_with_eos": true,
+            "children": [],
+            "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\nTo find the values of \\( x \\) that make the denominator zero, we set the factored form equal to zero:\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nWe solve this equation by setting each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the number of vertical asymptotes.\nThe function \\( y = \\frac{2}{x^2 + x - 6} \\) has vertical asymptotes at the values of \\( x \\) that make the denominator zero. From our factorization, we found that \\( x = -3 \\) and \\( x = 2 \\) are the solutions.\n\nTherefore, the function has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "children_nodes": []
+          },
+          {
+            "segment_id": 3,
+            "parent_id": 1,
+            "text": " We found that \\( x = -3 \\) and \\( x = 2 \\) are the solutions.\n\nTherefore, the function has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "num_tokens": 43,
+            "start_depth": 366,
+            "end_depth": 408,
+            "entry": {
+              "token_id": 1205,
+              "token_str": " We",
+              "prob": 0.16394515335559845,
+              "entropy": 1.896155595779419,
+              "is_fork": true
+            },
+            "fork": null,
+            "is_leaf": true,
+            "ends_with_eos": true,
+            "children": [],
+            "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\nTo find the values of \\( x \\) that make the denominator zero, we set the factored form equal to zero:\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nWe solve this equation by setting each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the number of vertical asymptotes.\nThe function \\( y = \\frac{2}{x^2 + x - 6} \\) has vertical asymptotes at the values of \\( x \\) that make the denominator zero. We found that \\( x = -3 \\) and \\( x = 2 \\) are the solutions.\n\nTherefore, the function has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "children_nodes": []
+          },
+          {
+            "segment_id": 4,
+            "parent_id": 1,
+            "text": " In this case, the denominator is zero at \\( x = -3 \\) and \\( x = 2 \\).\n\nTherefore, the function has two vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "num_tokens": 44,
+            "start_depth": 366,
+            "end_depth": 409,
+            "entry": {
+              "token_id": 758,
+              "token_str": " In",
+              "prob": 0.15082406997680664,
+              "entropy": 1.896155595779419,
+              "is_fork": true
+            },
+            "fork": null,
+            "is_leaf": true,
+            "ends_with_eos": true,
+            "children": [],
+            "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\nTo find the values of \\( x \\) that make the denominator zero, we set the factored form equal to zero:\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nWe solve this equation by setting each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the number of vertical asymptotes.\nThe function \\( y = \\frac{2}{x^2 + x - 6} \\) has vertical asymptotes at the values of \\( x \\) that make the denominator zero. In this case, the denominator is zero at \\( x = -3 \\) and \\( x = 2 \\).\n\nTherefore, the function has two vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "children_nodes": []
+          }
+        ]
+      },
+      {
+        "segment_id": 5,
+        "parent_id": 0,
+        "text": "\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the vertical asymptotes.\nThe values \\( x = -3 \\) and \\( x = 2 \\) are the points where the denominator is zero, and",
+        "num_tokens": 117,
+        "start_depth": 205,
+        "end_depth": 321,
+        "entry": {
+          "token_id": 78045,
+          "token_str": "\\[",
+          "prob": 0.19166409969329834,
+          "entropy": 1.8105109930038452,
+          "is_fork": true
+        },
+        "fork": {
+          "depth": 322,
+          "entropy": 1.8541407585144043,
+          "options": [
+            {
+              "token_id": 8450,
+              "token_str": " thus",
+              "prob": 0.3720107078552246,
+              "is_greedy": true
+            },
+            {
+              "token_id": 1493,
+              "token_str": " these",
+              "prob": 0.20025111734867096,
+              "is_greedy": false
+            },
+            {
+              "token_id": 2474,
+              "token_str": " since",
+              "prob": 0.1344432830810547,
+              "is_greedy": false
+            }
+          ]
+        },
+        "is_leaf": false,
+        "ends_with_eos": false,
+        "children": [
+          6,
+          7,
+          11
+        ],
+        "children_nodes": [
+          {
+            "segment_id": 6,
+            "parent_id": 5,
+            "text": " thus the function is undefined. These are the locations of the vertical asymptotes.\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has \\(\\boxed{2}\\) vertical asymptotes.<|im_end|>",
+            "num_tokens": 52,
+            "start_depth": 322,
+            "end_depth": 373,
+            "entry": {
+              "token_id": 8450,
+              "token_str": " thus",
+              "prob": 0.3720107078552246,
+              "entropy": 1.8541407585144043,
+              "is_fork": false
+            },
+            "fork": null,
+            "is_leaf": true,
+            "ends_with_eos": true,
+            "children": [],
+            "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the vertical asymptotes.\nThe values \\( x = -3 \\) and \\( x = 2 \\) are the points where the denominator is zero, and thus the function is undefined. These are the locations of the vertical asymptotes.\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has \\(\\boxed{2}\\) vertical asymptotes.<|im_end|>",
+            "children_nodes": []
+          },
+          {
+            "segment_id": 7,
+            "parent_id": 5,
+            "text": " these are the potential vertical asymptotes.",
+            "num_tokens": 8,
+            "start_depth": 322,
+            "end_depth": 329,
+            "entry": {
+              "token_id": 1493,
+              "token_str": " these",
+              "prob": 0.20025111734867096,
+              "entropy": 1.854140043258667,
+              "is_fork": true
+            },
+            "fork": {
+              "depth": 330,
+              "entropy": 1.99626624584198,
+              "options": [
+                {
+                  "token_id": 8704,
+                  "token_str": " Since",
+                  "prob": 0.296993225812912,
+                  "is_greedy": true
+                },
+                {
+                  "token_id": 2014,
+                  "token_str": " To",
+                  "prob": 0.2390051782131195,
+                  "is_greedy": false
+                },
+                {
+                  "token_id": 4354,
+                  "token_str": " However",
+                  "prob": 0.15863220393657684,
+                  "is_greedy": false
+                }
+              ]
+            },
+            "is_leaf": false,
+            "ends_with_eos": false,
+            "children": [
+              8,
+              9,
+              10
+            ],
+            "children_nodes": [
+              {
+                "segment_id": 8,
+                "parent_id": 7,
+                "text": " Since the numerator \\( 2 \\) is non-zero at these points, the function will have vertical asymptotes at \\( x = -3 \\) and \\( x = 2 \\).\n\nTherefore, the number of vertical asymptotes is \\( 2 \\).\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+                "num_tokens": 62,
+                "start_depth": 330,
+                "end_depth": 391,
+                "entry": {
+                  "token_id": 8704,
+                  "token_str": " Since",
+                  "prob": 0.296993225812912,
+                  "entropy": 1.99626624584198,
+                  "is_fork": false
+                },
+                "fork": null,
+                "is_leaf": true,
+                "ends_with_eos": true,
+                "children": [],
+                "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the vertical asymptotes.\nThe values \\( x = -3 \\) and \\( x = 2 \\) are the points where the denominator is zero, and these are the potential vertical asymptotes. Since the numerator \\( 2 \\) is non-zero at these points, the function will have vertical asymptotes at \\( x = -3 \\) and \\( x = 2 \\).\n\nTherefore, the number of vertical asymptotes is \\( 2 \\).\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+                "children_nodes": []
+              },
+              {
+                "segment_id": 9,
+                "parent_id": 7,
+                "text": " To confirm, we check that these values do not make the numerator zero, which they do not (since the numerator is \\(2\\)).\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has two vertical asymptotes at \\( x = -3 \\) and \\( x = 2 \\).\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+                "num_tokens": 83,
+                "start_depth": 330,
+                "end_depth": 412,
+                "entry": {
+                  "token_id": 2014,
+                  "token_str": " To",
+                  "prob": 0.2390051782131195,
+                  "entropy": 1.99626624584198,
+                  "is_fork": true
+                },
+                "fork": null,
+                "is_leaf": true,
+                "ends_with_eos": true,
+                "children": [],
+                "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the vertical asymptotes.\nThe values \\( x = -3 \\) and \\( x = 2 \\) are the points where the denominator is zero, and these are the potential vertical asymptotes. To confirm, we check that these values do not make the numerator zero, which they do not (since the numerator is \\(2\\)).\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has two vertical asymptotes at \\( x = -3 \\) and \\( x = 2 \\).\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+                "children_nodes": []
+              },
+              {
+                "segment_id": 10,
+                "parent_id": 7,
+                "text": " However, we need to check if these values also make the numerator zero, as this would indicate a hole in the graph rather than a vertical asymptote.\n\nStep 6: Check the numerator.\nThe numerator is \\( 2 \\), which is a constant and never zero for any \\( x \\).\n\nSince the numerator is never zero at \\( x = -3 \\) and \\( x = 2 \\), these values are indeed vertical asymptotes.\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+                "num_tokens": 130,
+                "start_depth": 330,
+                "end_depth": 459,
+                "entry": {
+                  "token_id": 4354,
+                  "token_str": " However",
+                  "prob": 0.15863220393657684,
+                  "entropy": 1.99626624584198,
+                  "is_fork": true
+                },
+                "fork": null,
+                "is_leaf": true,
+                "ends_with_eos": true,
+                "children": [],
+                "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the vertical asymptotes.\nThe values \\( x = -3 \\) and \\( x = 2 \\) are the points where the denominator is zero, and these are the potential vertical asymptotes. However, we need to check if these values also make the numerator zero, as this would indicate a hole in the graph rather than a vertical asymptote.\n\nStep 6: Check the numerator.\nThe numerator is \\( 2 \\), which is a constant and never zero for any \\( x \\).\n\nSince the numerator is never zero at \\( x = -3 \\) and \\( x = 2 \\), these values are indeed vertical asymptotes.\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+                "children_nodes": []
+              }
+            ]
+          },
+          {
+            "segment_id": 11,
+            "parent_id": 5,
+            "text": " since the numerator is non-zero at these points, the function has vertical asymptotes at these values.\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "num_tokens": 60,
+            "start_depth": 322,
+            "end_depth": 381,
+            "entry": {
+              "token_id": 2474,
+              "token_str": " since",
+              "prob": 0.1344432830810547,
+              "entropy": 1.854140043258667,
+              "is_fork": true
+            },
+            "fork": null,
+            "is_leaf": true,
+            "ends_with_eos": true,
+            "children": [],
+            "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Determine the vertical asymptotes.\nThe values \\( x = -3 \\) and \\( x = 2 \\) are the points where the denominator is zero, and since the numerator is non-zero at these points, the function has vertical asymptotes at these values.\n\nTherefore, the function \\( y = \\frac{2}{x^2 + x - 6} \\) has 2 vertical asymptotes.\n\nAnswer: \\(\\boxed{2}\\)<|im_end|>",
+            "children_nodes": []
+          }
+        ]
+      },
+      {
+        "segment_id": 12,
+        "parent_id": 0,
+        "text": "For vertical asymptotes, we set the denominator equal to zero:\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Verify the solutions.\nWe need to ensure that these values do not make the numerator zero, as this would result in a removable discontinuity (hole) rather than a vertical asymptote.\n\nThe numerator is \\( 2 \\), which is a constant and never zero for any \\( x \\).\n\nTherefore, the values \\( x = -3 \\) and \\( x = 2 \\) are the points where the function has vertical asymptotes.\n\nAnswer: The graph of \\( y = \\frac{2}{x^2 + x - 6} \\) has 2 vertical asymptotes.<|im_end|>",
+        "num_tokens": 217,
+        "start_depth": 205,
+        "end_depth": 421,
+        "entry": {
+          "token_id": 2461,
+          "token_str": "For",
+          "prob": 0.11913776397705078,
+          "entropy": 1.8105109930038452,
+          "is_fork": true
+        },
+        "fork": null,
+        "is_leaf": true,
+        "ends_with_eos": true,
+        "children": [],
+        "full_completion": "To determine the number of vertical asymptotes for the function \\( y = \\frac{2}{x^2 + x - 6} \\), we need to identify the values of \\( x \\) that make the denominator zero, as these are the points where the function is undefined and potentially has vertical asymptotes.\n\nStep 1: Factor the denominator.\nThe denominator is \\( x^2 + x - 6 \\). We need to factor this quadratic expression.\n\nStep 2: Factor the quadratic expression.\nWe look for two numbers that multiply to \\(-6\\) (the constant term) and add up to \\(1\\) (the coefficient of the \\(x\\)-term). These numbers are \\(3\\) and \\(-2\\).\n\nSo, we can factor \\( x^2 + x - 6 \\) as:\n\\[ x^2 + x - 6 = (x + 3)(x - 2) \\]\n\nStep 3: Set the factored form equal to zero.\nFor vertical asymptotes, we set the denominator equal to zero:\n\\[ (x + 3)(x - 2) = 0 \\]\n\nStep 4: Solve for \\( x \\).\nSet each factor equal to zero:\n\\[ x + 3 = 0 \\quad \\text{or} \\quad x - 2 = 0 \\]\n\\[ x = -3 \\quad \\text{or} \\quad x = 2 \\]\n\nStep 5: Verify the solutions.\nWe need to ensure that these values do not make the numerator zero, as this would result in a removable discontinuity (hole) rather than a vertical asymptote.\n\nThe numerator is \\( 2 \\), which is a constant and never zero for any \\( x \\).\n\nTherefore, the values \\( x = -3 \\) and \\( x = 2 \\) are the points where the function has vertical asymptotes.\n\nAnswer: The graph of \\( y = \\frac{2}{x^2 + x - 6} \\) has 2 vertical asymptotes.<|im_end|>",
+        "children_nodes": []
+      }
+    ]
+  }
+}
