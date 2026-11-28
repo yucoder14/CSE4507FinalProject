@@ -1,4 +1,6 @@
 const tree_data_path = "./data/reasoning_trees.jsonl";
+const token_data_a_path = "./data/token_stats_first_half.jsonl";
+const token_data_b_path = "./data/token_stats_second_half.jsonl";
 const problem_metadata_path = "./data/problem_metadata.jsonl";
 
 async function loadJsonl(url) {
@@ -15,11 +17,18 @@ async function loadJsonl(url) {
 
 Promise.all([
 	loadJsonl(tree_data_path),
+	loadJsonl(token_data_a_path),
+	loadJsonl(token_data_b_path),
 	loadJsonl(problem_metadata_path),
-]).then(([tree_data, problem_metadata]) => {
+]).then(([tree_data, token_data_a, token_data_b, problem_metadata]) => {
 	// Wrangle data
 	const treeData = Object.fromEntries(
 		tree_data.map((row, i) => [i, row]) 
+	);
+	// Token Data that was previously removed 
+	const token_data = token_data_a.concat(token_data_b);
+	const tokenData = Object.fromEntries(
+		token_data.map(row => [`${row.example_id}:${row.segment_id}`, row.tokens])
 	);
 	const problemMetadata = Object.fromEntries(
 		problem_metadata.map(row => [row.example_id, row.metadata])

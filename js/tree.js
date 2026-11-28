@@ -79,7 +79,7 @@ class ReasoningTree {
 			.style("user-select", "none");
 
 		const updateColorToggle = () => {
-			colorToggleText.text(this.useEntropy ? "entropy" : "prob");
+			colorToggleText.text(this.useEntropy ? "entropy" : "probability");
 		};
 		updateColorToggle();
 	}	
@@ -235,7 +235,7 @@ class ReasoningTree {
 				return prob;
 			})
 			.attr("entropy", d => {
-				const entropy = (d.data.ends_with_eos) ? 0 : d.data.fork.entropy ;
+				const entropy = (d.data.fork) ?  d.data.fork.entropy : 0;
 				return entropy;	 
 			})	
 			.on("mouseover", (event, d) => { 
@@ -377,7 +377,7 @@ class ReasoningTree {
 		d3.selectAll(".node-circle") 
 			.attr("fill", d => {
 				const prob = (d.data.entry) ? d.data.entry.prob : 1;
-				const entropy = (d.data.ends_with_eos) ? 0 : d.data.fork.entropy ;
+				const entropy = (d.data.fork) ?  d.data.fork.entropy : 0; 
 				if (this.useEntropy) {
 					return colorScale(entropy);	 
 				} else {	
