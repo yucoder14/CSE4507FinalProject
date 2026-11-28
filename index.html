@@ -1,17 +1,29 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-	<title>Prototyping</title>
-  	<link rel="stylesheet" href="./css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reasoning tree dashboard</title>
+  	<link rel="stylesheet" href="./css/tree.css">
 </head>
   <body>
-	<div id="display">
-	  <div id="tree-canvas"></div>
-	  <div id="text-canvas"></div>
+	<div id="content">
+	  <div id="selector"></div>
+	  <section id="question-panel" aria-labelledby="question-heading">
+		<div class="panel-heading"><h2 id="question-heading">Question</h2><span id="question-id"></span></div>
+		<div id="question-content">Choose a problem to see its full question.</div>
+	  </section>
+	  <div id="display">
+		<section class="display-panel"><h2>Reasoning tree</h2><div id="tree-canvas"></div></section>
+		<section class="display-panel text-panel"><div class="panel-heading"><h2>Reasoning path</h2><label class="animation-control"><input id="animate-text" type="checkbox" checked> Animate text</label></div><div id="text-canvas"></div></section>
+	  </div>
 	</div>
+	<script>window.MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]}, options: {skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']}};</script>
+	<script id="mathjax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 	<script src="js/d3.v7.min.js"></script>
 	<script src="js/paragraph.js"></script>
 	<script src="js/tree.js"></script>
+	<script src="js/selector.js"></script>
 	<script src="js/main.js"></script>
   </body>
 </html>

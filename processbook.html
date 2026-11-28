@@ -10,6 +10,7 @@
 		<li><strong>Title:</strong> Visualizing "Forks" in the Roads: Entropy and Mathematical resasoning of LLMs</li>
 		<li><strong>Changwoo Yu</strong> | <a href='mailto:changwoo@wustl.edu'>changwoo@wustl.edu</a> | 612299 </li>
 		<li><strong>Chenjie Mao</strong> | <a href='mailto:cmao@wustl.edu'>cmao@wustl.edu</a> | 603512 </li>
+		<li><strong>Kevin Xu</strong> | <a href='mailto:sizhex@wustl.edu'>sizhex@wustl.edu</a> | [id] </li>
 	  </ul>
 	</div>
 	<div class="section">
@@ -373,5 +374,107 @@ The final dataset is exported as a nested JSON structure, with the original ques
 	  </li>
 	</ul>
   </div>
-</html>
+  <h1> Project Milestone 2</h1>
+  <div class="section">
+	<h2>Data Processing</h2>
+	<p>
+	To support entropy-based color encoding in the visualization, we additionally record token-level statistics for every node within each reasoning segment in <code>token_stats.jsonl</code>. These include the probability and entropy of the next-token distribution, together with the top-k token candidates and their probabilities.
+	</p>
 
+	<p>
+	We also store the metadata associated with each problem in <code>problem_metadata.jsonl</code>, including the original question, model prompt, ground-truth solution, problem category, and difficulty level, where available.
+	</p>
+
+	<p>
+	The dataset consists of 100 problems sampled from the MATH dataset. To avoid the bias introduced by the original ordering of the dataset, we randomly shuffle the problems before selection using a fixed seed of 42. This ensures reproducibility while allowing problems from different mathematical categories and difficulty levels to be represented. Note that the sampling is not explicitly balanced across categories.
+	</p>
+  </div>
+  <div class="section">
+	<h2>Visualization Update</h2>
+
+	<h3>Start Screen</h3>
+	We have now a fully working prototype of our visualization. Users will be presented with the following screen when they first encouter our 
+	visualization:
+	<img src="assets/start_screen.png">
+	
+	<h3>Problem Selection</h3>
+	Users have two filters that they could work with. The level filter corresponds to the difficulty level of the problems, ranging from 1 to 5. 
+	<img src="assets/level_filter.png">
+	The type filter corresponds to the problem types.
+	<img src="assets/type_filter.png">
+	Users can choose to either selection only one (which is not shown in the below image) or both of the filters. 
+	Once the user selects desired filters, users will then be able to choose a problem from a filtered list of problems. Because we have randomly 
+	sample subset of problems, some combination of filters may yield zero problems. This is an artifact of our data generation process and NOT a
+	consequence of the used dataset.  	
+	<img src="assets/problem_selection.png">
+
+	<h3>Node Navigation</h3>
+	As soon as user selects a problem, the tree visualization will be drawn as well as the paragraph visualization. The tree visualization starts 
+	off in subtree mode, where only the immediate parent and children of the current nodes are shown. The corresponding paragraph visualization 
+	renders text upto the point where the generation forks. 
+	<img src="assets/initial_state.png">
+	By selecting on a node by cliking on them, (e.g. clicking on node 'divide'), you can navigate to the next subtree:
+	<img src="assets/node_selection_update.png">
+	Selected paths and nodes will be outlined with green. Once, the selection is made, paragraph visualization further renders the texts upto the 
+	next fork.
+
+	<h3>Changing Tree Mode</h3>
+	The benefits of subtree mode is that it illustrates the autoregressive process of text generation where the next token is chosen given prior 
+	tokens. However, it may be tedious to navigate within the subtree mode every time a user wishes to choose different paths. Thus, the tree 
+    visualization now supports functionality where you can toggle between two modes: subtree mode and full tree mode. 	
+	<img src="assets/treemode_toggle_a.png">
+	By clicking on the gray square with 'subtree' label, you can transition seamlessly to the full tree mode.
+	<img src="assets/full_tree.png">
+	The node selection is preserved during the transition, allowing users to toggle between modes without losing track of their previous selection.
+	As support in previous versions, users are able to select any nodes in the tree to quickly select a path through the reasoning tree. 
+	<img src="assets/treemode_toggle_b.png">
+	By clicking on the gray square now with 'full tree' label, you can transition back to the subtree mode.	
+	<img src="assets/subtree.png">
+	Again, the transition remembers the previously selected node and draws appropriate subtree corresponding to the selected node.
+
+	<h3>Changing Color Mode</h3>
+	Entropy of information is closely tied to the likelihood of information. Thus, we decided to support the functionality where users cand toggle
+	between different color encodings.
+	<img src="assets/colormode_toggle.png">
+	By clicking on the gray square labeled 'entropy', user can change color mode from entropy to probability.
+	<img src="assets/colormode_prob.png">
+	By clicking on the gray square now labeled with 'prob', user can change color mode from probability to entropy.
+  </div>
+  <div class="section">
+	<h2>User Study</h2>
+	<h3>Overview</h3>
+	Our topic, intrinsically an obscure subject, poses some challenges when conducting user study. First of all, without prior knowledge in 
+	entropy, the color encoding and scales may be nonsensical to uneducated eyes. For the final product, we plan to introduce our visualization 
+	with a short introductory article that informs readers with minimum background knowledge to understand our visualizations. Next, it is not 
+    possible for us to assign users with a specific task that leads to specific insights (e.g. when does the waiting period peak for X ride?). 
+	Our project, which was designed to be an exploratory, then would be best evaluated by gauging what explatory insights users collect as they
+	interact with our visualization.
+	<h3>Plan</h3>
+	The user study will be conducted in four stages.
+	<ol>
+	  <li>
+		<strong>Think-aloud</strong>: In this phase, users will receive minimum guidance and will be asked to verbally share their experience. 
+	  </li>
+	  <li>
+		<strong>Tasks</strong>: At this phase is when we direct users with specific set of tasks. We are thinking about asking users the following
+		tasks/questions:
+		<ul>
+		  <li>How do selection of tokens with high entropy at each fork impact the answer quality?</li>
+		  <li>How do selection of tokens with high entropy impact the length of the answer?</li>
+		  <li>Does difficulty of the problem impact the number of forks/depth of the tree?</li>
+		  <li>Are there any structural patterns per difficulty and problem type?</li>
+		  <li>What kind of words tends to have high entropy?</li>
+		  <li>What is the relationship between entropy and probability?</li>
+		</ul>
+	  </li>
+	  <li>
+		<strong>Feedback</strong>: In this phase, we will ask users to evaluate how effective our visualization was when answering the questions.
+		We will yet to reveal the main objective of our diagram.
+	  </li>
+	  <li>
+		<strong>Debrief</strong>: In this phase, we will reveal the objective and debrief.
+	  </li>
+	</ol>
+	<h3>Results: 4 minimum studies</h3>
+  </div>
+</html>
